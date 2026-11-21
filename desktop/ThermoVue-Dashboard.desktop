@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=ThermoVue Dashboard
+Comment=Dashboard thermocouple tipe K, pressure, dan status solenoid
+Exec=/home/admin/.local/bin/thermovue-dashboard
+TryExec=/home/admin/.local/bin/thermovue-dashboard
+Icon=/home/admin/.local/share/icons/thermovue.svg
+Terminal=false
+Categories=Utility;Monitor;
+StartupNotify=true
+StartupWMClass=ThermoVueDashboard

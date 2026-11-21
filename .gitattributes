@@ -1,0 +1,9 @@
+* text=auto
+*.py text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.sh text eol=lf
+*.service text eol=lf
+*.desktop text eol=lf
+desktop/thermovue-dashboard text eol=lf

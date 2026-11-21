@@ -1,0 +1,40 @@
+{
+  "modbus": {
+    "enabled": true,
+    "port": "/dev/ttyUSB0",
+    "baudrate": 9600,
+    "parity": "N",
+    "stopbits": 1,
+    "slave_id": 1,
+    "sensor2_enabled": true,
+    "sensor2_slave_id": 5,
+    "register_address": 0,
+    "sensor2_register_address": 0,
+    "scale": 10.0
+  },
+  "sensor1": {
+    "name": "Thermocouple K - Suhu 1",
+    "offset": 0.0,
+    "low_alarm": 10.0,
+    "high_alarm": 75.0,
+    "min_display": -20.0,
+    "max_display": 150.0
+  },
+  "sensor2": {
+    "name": "Thermocouple K - Suhu 2",
+    "offset": 0.0,
+    "low_alarm": 10.0,
+    "high_alarm": 75.0,
+    "min_display": -20.0,
+    "max_display": 150.0
+  },
+  "logging": {
+    "interval_minutes": 10
+  },
+  "system": {
+    "unit": "C",
+    "sample_interval_ms": 1000,
+    "audio_alarm_enabled": true,
+    "max_history_points": 500
+  }
+}

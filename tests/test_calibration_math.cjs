@@ -1,0 +1,13 @@
+const assert = require('node:assert/strict');
+require('../thermovue-web/static/calibration-math.js');
+const points=[{raw_c:0,reference_c:2},{raw_c:50,reference_c:55},{raw_c:100,reference_c:101}];
+const sensor={offset:999,calibration:{method:'piecewise_linear',points}};
+for(const [raw,expected] of [[0,2],[25,28.5],[50,55],[75,78],[100,101],[-10,-8],[120,121]])assert.equal(ThermoCalibration.apply(raw,sensor),expected);
+assert.equal(ThermoCalibration.apply(null,sensor),null);
+assert.equal(ThermoCalibration.apply(25,{offset:1.5}),26.5);
+assert.deepEqual(ThermoCalibration.validate([...points].reverse()),points);
+assert.throws(()=>ThermoCalibration.validate(points.slice(0,2)));
+assert.throws(()=>ThermoCalibration.validate([points[0],points[0],points[2]]));
+assert.throws(()=>ThermoCalibration.validate([points[0],{raw_c:50,reference_c:1},points[2]]));
+assert.throws(()=>ThermoCalibration.validate([points[0],{raw_c:NaN,reference_c:55},points[2]]));
+console.log('JavaScript calibration: interpolation, endpoints, outside range, validation passed');

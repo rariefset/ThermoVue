@@ -1,0 +1,9 @@
+{
+  "base_url": "https://dev-ai.ub.ac.id/vacumfr/api/v1",
+  "node_id": "REPLACE_WITH_NODE_ID",
+  "device_secret": "REPLACE_WITH_DEVICE_SECRET",
+  "thermovue_url": "http://127.0.0.1:5000",
+  "interval_s": 1,
+  "network_interval_s": 5,
+  "solenoid_on": false
+}

@@ -1,0 +1,17 @@
+#!/bin/bash
+set -eu
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+export DISPLAY="${DISPLAY:-:0}"
+export XAUTHORITY="${XAUTHORITY:-$HOME/.Xauthority}"
+if [ -z "${WAYLAND_DISPLAY:-}" ]; then
+  for socket in "$XDG_RUNTIME_DIR"/wayland-*; do
+    if [ -S "$socket" ]; then export WAYLAND_DISPLAY="$(basename "$socket")"; break; fi
+  done
+fi
+export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=$XDG_RUNTIME_DIR/bus}"
+mkdir -p "$HOME/.local/state/thermovue-dashboard"
+if ! curl --silent --fail --max-time 5 http://127.0.0.1:5000/static/pi-dashboard.html >/dev/null; then
+  zenity --error --title="ThermoVue Dashboard" --text="Dashboard ThermoVue belum dapat diakses. Periksa thermovue-data.service, lalu buka kembali aplikasi." || true
+  exit 1
+fi
+exec /usr/bin/chromium --user-data-dir="$HOME/.local/share/thermovue-dashboard/chromium" --password-store=basic --disable-features=Translate,TranslateUI --lang=id --class=ThermoVueDashboard --app=http://127.0.0.1:5000/static/pi-dashboard.html --start-maximized --no-first-run --no-default-browser-check --disable-session-crashed-bubble "$@" >>"$HOME/.local/state/thermovue-dashboard/browser.log" 2>&1
